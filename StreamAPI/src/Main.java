@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -59,7 +60,7 @@ public class Main {
 		
 		//Count a number of words in a given sentence, which start with a given character
 		
-		String sentence = "if you are the dealer i am out of the game";
+		String sentence = "if you are the dealer I am out of the game";
 		System.out.println("Words start with 'i': "+countWordsByCharacter(sentence, "i"));
 		
 		//Given a string. Check whether it is a number.
@@ -97,12 +98,17 @@ public class Main {
 	}
 	
 	public static int sumAge(List<Person> persons) {
-		return persons.stream().filter(p -> p.age > 17).map(Person::getAge).reduce((a, b) -> a + b).orElse(0);
+
+		return persons.stream()
+				.filter(p -> p.age > 17)
+				.reduce(0, (a, b) -> a + b.getAge(), (a, b) -> a + b);
+		
 	}
 	
 	public static Map<Person, List<BankAccount>> getBankAccountsByCustomer(List<BankAccount> bankAccounts) {
 		
-		Map<Person, List<BankAccount>> collect = bankAccounts.stream().collect(Collectors.groupingBy(ba -> ba.getOwner()));
+		Map<Person, List<BankAccount>> collect = bankAccounts.stream()
+				.collect(Collectors.groupingBy(ba -> ba.getOwner()));
 		
 		return collect;
 		
@@ -117,7 +123,7 @@ public class Main {
 	}
 	
 	public static String allianateIbann(String ibann) {
-		return ibann.substring(0, 2) + ibann.substring(3).replaceAll("\\d", "*");
+		return ibann.substring(0, 2) + ibann.substring(2).replaceAll("\\d", "*");
 	}
 	
 	public static Map<Integer, List<Person>> getPersonsByAge(List<Person> persons) {
@@ -125,7 +131,8 @@ public class Main {
 	}
 	
 	public static long countWordsByCharacter(String sentence, String a) {
-		return Arrays.asList(sentence.split(" ")).stream().filter(s -> s.startsWith(a)).count();
+		List<String> asList = Arrays.asList(sentence.split(" "));
+		return asList.stream().map(s -> s.toLowerCase()).filter(s -> s.startsWith(a)).count();
 	}
 	
 	public static boolean isNumber(String isNumber) {
