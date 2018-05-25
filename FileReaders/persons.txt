@@ -1,0 +1,3 @@
+Ivan,15
+Piotr,25
+Anna,10
