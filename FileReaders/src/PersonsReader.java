@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -9,14 +11,14 @@ import java.util.stream.Collectors;
 public class PersonsReader {
 
 	public static void main(String [] args) throws IOException {
-		List<Person> persons = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader("persons.txt"))) {
-			persons = br.lines()
+		try (BufferedReader br = new BufferedReader(new FileReader("persons.txt"));
+				PrintWriter pw = new PrintWriter(
+						new FileWriter("C:\\Users\\LenovoUser\\sergey\\2018_05_22_Readers\\sorted_persons.txt"))) {
+			br.lines()
 			.map(s -> stringToPerson(s))
-			.collect(Collectors.toList());
+			.sorted(Comparator.comparing(Person::getAge))
+			.forEach(pw::println);
 		}
-		
-		System.out.println(persons);
 	}
 	
 	public static Person stringToPerson(String s) {

@@ -21,7 +21,7 @@ public class SumupFiles {
 		System.out.println("sum " + a);
 	
 		//reading file using try with resources and stream API
-		try(BufferedReader br1 = new BufferedReader(new FileReader("numbers"))) {
+		try(BufferedReader br1 = new BufferedReader(new FileReader("numbers.txt"))) {
 			System.out.println("Sum "+sumUp(br1));
 		} catch (Exception ex) {
 			
