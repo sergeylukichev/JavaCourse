@@ -1,0 +1,5 @@
+Sergey,Lukichev,Notebook Lenovo,500
+Piotr,Ivanov,Apple MacBook,800
+Sergey,Lukichev,Keyboard Cherry,25
+Ivan,Petrov,Mouspad,5
+Piotr,Ivanov,Apple Touchpad,60
