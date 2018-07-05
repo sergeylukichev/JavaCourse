@@ -1,5 +1,8 @@
 package telran.weather;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchResult {
 	String title;
 	String woeid;
@@ -8,6 +11,10 @@ public class SearchResult {
 		super();
 		this.title = title;
 		this.woeid = woeid;
+	}
+	
+	public SearchResult() {
+		
 	}
 
 	public String getTitle() {
