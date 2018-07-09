@@ -8,7 +8,6 @@ public class SearchResult {
 	String woeid;
 
 	public SearchResult(String title, String woeid) {
-		super();
 		this.title = title;
 		this.woeid = woeid;
 	}
