@@ -18,6 +18,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <scope>test</scope>
+		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.skyscreamer/jsonassert -->
+		<dependency>
+		    <groupId>org.skyscreamer</groupId>
+		    <artifactId>jsonassert</artifactId>
+		    <version>1.5.0</version>
+		    <scope>test</scope>
+		</dependency>
+        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -33,6 +47,12 @@
       		<version>4.12</version>
       		<scope>test</scope>
 	    </dependency>
+	    <dependency>
+	    <groupId>org.mockito</groupId>
+	    <artifactId>mockito-core</artifactId>
+	    <version>2.10.0</version>
+	    <scope>test</scope>
+	</dependency>	
     </dependencies>
 
 

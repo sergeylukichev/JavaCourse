@@ -6,11 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 import de.telran.model.Token;
 import de.telran.model.User;
@@ -18,31 +14,27 @@ import de.telran.model.User;
 public class UserGateway {
 	String registerUrl = "http://localhost:8080/user/register";
 	String loginUrl = "http://localhost:8080/user/login";
+	
 	RestTemplate rest;
 	
 	public UserGateway(RestTemplate rest) {
 		this.rest = rest;
+		this.rest.setErrorHandler(new RestTemplateResponseErrorHanlder());
 		
 	}
 	
 	public boolean register(User user) {
-		return false;
+		HttpEntity<User> userRequest = new HttpEntity<>(user, null);
+		ResponseEntity<Void> exchange = rest.exchange(registerUrl, HttpMethod.POST, userRequest, Void.class);
+		return exchange.getStatusCode() == HttpStatus.OK;
 	}
 	
-	public String login(User user) {
-		return null;	
+	public Token login(User user) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<User> userRequest = new HttpEntity<>(user, headers);
+		ResponseEntity<Token> exchange = rest.exchange(loginUrl, HttpMethod.POST, userRequest, Token.class);
+		Token token = exchange.getBody();
+		return token;		
 	}
-	
-	private void configureConverter() {
-		MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-		messageConverter.setPrettyPrint(false);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setPropertyNamingStrategy(
-			    PropertyNamingStrategy.SNAKE_CASE);	
-		
-		messageConverter.setObjectMapper(mapper);
-		rest.getMessageConverters().removeIf(m -> m.getClass().getName().equals(MappingJackson2HttpMessageConverter.class.getName()));
-		rest.getMessageConverters().add(messageConverter);
-	}
-
 }

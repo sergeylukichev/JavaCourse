@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import de.telran.gateway.ItemGateway;
 import de.telran.gateway.UserGateway;
 import de.telran.model.Item;
+import de.telran.model.Token;
 import de.telran.model.User;
 
 
@@ -17,13 +18,13 @@ public class ItemGatewayTest {
 	public void testCreateItem() {
 		
 		ItemGateway gateway = new ItemGateway(new RestTemplate());
-		String token = loginUser();
+		Token token = loginUser();
 		boolean createItem = gateway.createItem(createTestItem(), token);
 		assertTrue("item created", createItem);
 		
 	}
 	
-	private String loginUser() {
+	private Token loginUser() {
 		UserGateway userGateway = new UserGateway(new RestTemplate());
 		return userGateway.login(new User("sergey2", "test"));
 	}
