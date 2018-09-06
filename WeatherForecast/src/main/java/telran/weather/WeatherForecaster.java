@@ -8,10 +8,11 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import telran.weather.DataSource;
 import telran.weather.ForecastResult;
 import telran.weather.SearchResult;
+import telran.weather.exception.LocationNotFoundException;
 
 public class WeatherForecaster {
 	
-	DataSource source;
+	DataSource source = new DataSource();
 	ObjectMapper objectMapper = new ObjectMapper();
 		
 	public WeatherForecaster(DataSource source) {
@@ -33,9 +34,8 @@ public class WeatherForecaster {
 			SearchResult[] results = mapper.readValue(searchResultString.get(), SearchResult[].class);
 			return results[0];
 		} else {
-			throw new Exception("No locations found for city "+city);
-		}
-		
+			throw new LocationNotFoundException("No locations found for city "+city);
+		}	
 	}
 	
 	public ForecastResult getForecast(String woeid) throws Exception {
@@ -47,5 +47,4 @@ public class WeatherForecaster {
 			throw new Exception ("No forecast found for woeid "+woeid);
 		}
 	}
-	
 }

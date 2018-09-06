@@ -1,6 +1,7 @@
 package telran.weather;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -19,7 +20,7 @@ public class DataSource {
 		
 	}
 	
-	public Optional<String> readSearchResults(String param) throws Exception {
+	public Optional<String> readSearchResults(String param) throws IOException {
 		searchUrl = new URL(SEARCH_URL+"?"+QUERY_PARAM+"="+param);
 		URLConnection conn = searchUrl.openConnection();
 		return readFromInputStream(conn.getInputStream());

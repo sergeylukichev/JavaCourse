@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import telran.weather.SearchResult;
 import telran.weather.DataSource;
@@ -19,7 +20,7 @@ public class WeatherForecasterTest {
 	
 	WeatherForecaster forecaster;
 	
-	DataSource s = mock(DataSource.class);
+	DataSource s = Mockito.mock(DataSource.class);
 	
 	@Before
 	public void setUp() throws Exception {
