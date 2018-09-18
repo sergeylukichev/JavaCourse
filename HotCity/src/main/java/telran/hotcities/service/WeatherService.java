@@ -1,12 +1,18 @@
 package telran.hotcities.service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import exception.SomeCitiesNotFoundException;
 import telran.hotcities.gateway.ExternalWeatherGateway;
 import telran.hotcities.model.HottestCity;
+import telran.hotcities.model.SearchResult;
+import telran.hotcities.model.WeatherForecast;
 
 @Service
 public class WeatherService {
@@ -17,8 +23,26 @@ public class WeatherService {
 		this.gateway = gateway;
 	}
 	
-	public HottestCity getHottestCity(String [] cities) {
-		return new HottestCity("Berlin", "25");
+	public HottestCity getHottestCity(String [] cities) throws Exception {
+		
+		List<String> asList = Arrays.asList(cities);
+		
+		List<WeatherForecast> listOfForecasts = asList.stream()
+		.map(s -> gateway.getSearchResultsByCityName(s))
+		.filter(o -> o.isPresent())
+		.map(o -> o.get())
+		.map(s -> gateway.getForecast(s.getWoeid()))
+		.sorted((a, b) -> a.compareTo(b))
+		.collect(Collectors.toList());
+		
+		if(listOfForecasts.isEmpty()) {
+			throw new SomeCitiesNotFoundException(Arrays.toString(cities));
+		}
+		
+		WeatherForecast wf = listOfForecasts.get(listOfForecasts.size()-1);
+		
+		return new HottestCity(wf.getTitle(), wf.getTemp());
+		
 	}
 	
 
