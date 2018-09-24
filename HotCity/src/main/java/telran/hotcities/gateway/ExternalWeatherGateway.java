@@ -6,7 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import exception.SomeCitiesNotFoundException;
+import telran.hotcities.exception.SomeCitiesNotFoundException;
 import telran.hotcities.model.SearchResult;
 import telran.hotcities.model.WeatherForecast;
 
@@ -29,8 +29,6 @@ public class ExternalWeatherGateway {
 		
 		ResponseEntity<SearchResult[]> exchange = rest.exchange(url,  HttpMethod.GET, null, SearchResult[].class);
 
-		System.out.println(exchange.getStatusCodeValue());
-		
 		SearchResult[] results = exchange.getBody();
 		
 		if(results.length == 0) {
@@ -42,9 +40,7 @@ public class ExternalWeatherGateway {
 	
 	public WeatherForecast getForecast(String woeid) {
 		final String url = forecastUrl+woeid;
-		
-		System.out.println(url);
-		
+	
 		ResponseEntity<WeatherForecast> exchange = rest.exchange(url,  HttpMethod.GET, null, WeatherForecast.class);
 
 		System.out.println(exchange.getStatusCodeValue());

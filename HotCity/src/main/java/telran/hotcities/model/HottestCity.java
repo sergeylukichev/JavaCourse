@@ -4,6 +4,8 @@ public class HottestCity {
 	String name;
 	String temp;
 	
+	public HottestCity() {}
+	
 	public HottestCity(String name, String temp) {
 		this.name = name;
 		this.temp = temp;

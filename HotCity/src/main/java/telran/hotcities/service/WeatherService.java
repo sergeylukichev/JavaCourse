@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import exception.SomeCitiesNotFoundException;
+import telran.hotcities.exception.SomeCitiesNotFoundException;
 import telran.hotcities.gateway.ExternalWeatherGateway;
 import telran.hotcities.model.HottestCity;
 import telran.hotcities.model.SearchResult;
@@ -23,7 +23,7 @@ public class WeatherService {
 		this.gateway = gateway;
 	}
 	
-	public HottestCity getHottestCity(String [] cities) throws Exception {
+	public HottestCity getHottestCity(String [] cities) throws SomeCitiesNotFoundException {
 		
 		List<String> asList = Arrays.asList(cities);
 		
