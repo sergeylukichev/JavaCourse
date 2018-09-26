@@ -25,8 +25,7 @@ public class HotCityResourceWebServiceTest {
     @Test
     public void testHotCity() throws Exception {
         HottestCity city = this.restTemplate.getForObject("http://localhost:" + port + "/api/weather/berlin", HottestCity.class);
-        System.out.println(city);
-        //assertTrue(city.contains("Berlin"));
+        assertTrue(city.getName().equals("Berlin"));
     }
 
 }

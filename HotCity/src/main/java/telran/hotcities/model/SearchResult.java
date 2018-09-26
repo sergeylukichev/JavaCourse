@@ -1,5 +1,8 @@
 package telran.hotcities.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class SearchResult {
 	private String title;
 	private String woeid;

@@ -1,16 +1,11 @@
 package telran.hotcities.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class ConsolidatedWeather {
 	
 	private double theTemp;
-	
-	@JsonCreator
-	public ConsolidatedWeather(@JsonProperty("the_temp") double theTemp) {
-		this.theTemp = theTemp;
-	}
 	
 	public ConsolidatedWeather() {}
 
