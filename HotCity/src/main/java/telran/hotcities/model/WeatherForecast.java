@@ -2,19 +2,12 @@ package telran.hotcities.model;
 
 import java.util.Arrays;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class WeatherForecast implements Comparable<WeatherForecast> {
-	String title;
-	ConsolidatedWeather[] consolidatedWeather;
-	
-	@JsonCreator
-	public WeatherForecast(@JsonProperty("title") String title, 
-			@JsonProperty("consolidated_weather") ConsolidatedWeather[] consolidatedWeather) {
-		this.title = title;
-		this.consolidatedWeather = consolidatedWeather;
-	}
+	private String title;
+	private ConsolidatedWeather[] consolidatedWeather;
 	
 	public WeatherForecast() {}
 	

@@ -20,7 +20,6 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest
 public class WeatherServiceTest {
 
   @MockBean
@@ -67,7 +66,7 @@ public class WeatherServiceTest {
       String [] cities = {"berlin","paris"};
       service.getHottestCity(cities);
 
-      //verifying how it went
+      //verifying 
       verify(gateway, times(1)).getSearchResultsByCityName("berlin");
       verify(gateway, times(1)).getForecast("11111");
       verify(gateway, times(1)).getSearchResultsByCityName("paris");

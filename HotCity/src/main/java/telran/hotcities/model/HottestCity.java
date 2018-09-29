@@ -4,6 +4,10 @@ public class HottestCity {
 	String name;
 	String temp;
 	
+	/*
+	 * added for jackson, when the class is used on the client side. 
+	 * The proper way would be to create another class for handle client-side deserialization.
+	 */
 	public HottestCity() {}
 	
 	public HottestCity(String name, String temp) {
