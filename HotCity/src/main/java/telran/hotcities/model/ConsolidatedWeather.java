@@ -3,6 +3,7 @@ package telran.hotcities.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
+
 public class ConsolidatedWeather {
 	
 	private double theTemp;

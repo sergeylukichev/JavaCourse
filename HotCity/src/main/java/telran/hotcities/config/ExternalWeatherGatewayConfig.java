@@ -15,7 +15,7 @@ public class ExternalWeatherGatewayConfig {
 	
 	@Autowired
 	private RestTemplateBuilder builder;
-	
+
 	@Bean
 	public ExternalWeatherGateway getWeatherGateway() throws Exception {
 		return new ExternalWeatherGateway("https://www.metaweather.com/api/location/search",
