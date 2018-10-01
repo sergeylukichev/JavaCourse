@@ -6,7 +6,7 @@ public class Main {
 	}
 	
 	public static int diff(int n) {
-		if(n>21) {
+		if(n<21) {
 			return n-1; 
 		} else {
 			return 2*(n-21);
