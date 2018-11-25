@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+out/
+.idea/
+*.iml
+target/
+git-init.jar
+git-init-jar-with-dependencies.jar
