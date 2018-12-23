@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head lang="en">
+            <title>People Web Resource</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        </head>
+<body>
+<h1>Hello</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th> First Name </th>
+        <th> Last Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${people.empty}">
+        <td colspan="2"> No People Yet</td>
+    </tr>
+    <tr th:each="person : ${people}">
+        <td><span th:text="${person.firstName}"> First Name </span></td>
+        <td><span th:text="${person.lastName}"> Last Name </span></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Enter a person</h2>
+<form th:action="@{/addPerson}"
+      th:object="${peopleForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}" /><br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}" />
+    <input type="submit" value="Add Person" />
+</form>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
