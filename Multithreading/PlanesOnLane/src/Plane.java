@@ -12,6 +12,6 @@ public class Plane implements Runnable {
 		synchronized(lane) {
 			lane.use(name);
 			System.out.println(name + " fly away!");	
-		}				
+		}
 	}
 }
