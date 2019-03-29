@@ -1,0 +1,18 @@
+{
+  "firstName": "Sergey",
+  "lastName": "Lukichev",
+  "address": {
+    "street": "Friedrichstrasse",
+    "city": "Berlin"
+  },
+  "phones": [
+    {
+      "countryCode": "+49",
+      "phoneNumber":"176389355"
+    },
+    {
+      "countryCode": "+7",
+      "phoneNumber":"956738465"
+    }
+  ]
+}
