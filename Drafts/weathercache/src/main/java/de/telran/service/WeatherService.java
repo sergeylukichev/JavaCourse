@@ -20,17 +20,8 @@ public class WeatherService {
     }
 
     public CityWeather getWeatherByCityName(String city) throws CityNotFoundException {
-        System.out.println("city "+city);
-        CityWeather byCity = weatherRepository.findByCity(city);
-        System.out.println(" weather from the repo "+ byCity);
-        if(byCity == null) {
-            WeatherForecast weatherForCity = externalWeatherService.getWeatherForCity(city);
-            System.out.println(weatherForCity);
-            CityWeather cityWeather = createCityWeather(weatherForCity);
-            weatherRepository.save(cityWeather);
-            return cityWeather;
-        }
-        return byCity;
+
+        return null;
     }
 
     private CityWeather createCityWeather(WeatherForecast forecast) {
