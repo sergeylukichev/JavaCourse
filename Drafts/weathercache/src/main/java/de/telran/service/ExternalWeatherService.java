@@ -1,5 +1,6 @@
 package de.telran.service;
 
+import de.telran.exception.CityNotFoundException;
 import de.telran.gateway.ExternalWeatherGateway;
 import de.telran.model.SearchResult;
 import de.telran.model.WeatherForecast;
@@ -18,8 +19,10 @@ public class ExternalWeatherService {
         this.gateway = gateway;
     }
 
-    public WeatherForecast getWeatherForCity(String city) {
+    public WeatherForecast getWeatherForCity(String city) throws CityNotFoundException{
         Optional<SearchResult> searchResultsByCityName = gateway.getSearchResultsByCityName(city);
-        return searchResultsByCityName.map(searchResult -> gateway.getForecast(searchResult.getWoeid())).orElse(null);
+        return searchResultsByCityName
+                .map(searchResult -> gateway.getForecast(searchResult.getWoeid()))
+                .orElseThrow(() -> new CityNotFoundException("city "+city+" not found"));
     }
 }

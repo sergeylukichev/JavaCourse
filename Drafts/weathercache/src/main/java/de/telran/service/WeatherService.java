@@ -21,7 +21,14 @@ public class WeatherService {
 
     public CityWeather getWeatherByCityName(String city) throws CityNotFoundException {
 
-        return null;
+        CityWeather byCity = weatherRepository.findByCity(city);
+        if(byCity == null) {
+            WeatherForecast weatherForCity = externalWeatherService.getWeatherForCity(city);
+            CityWeather cityWeather = createCityWeather(weatherForCity);
+            weatherRepository.save(cityWeather);
+            return cityWeather;
+        }
+        return byCity;
     }
 
     private CityWeather createCityWeather(WeatherForecast forecast) {
