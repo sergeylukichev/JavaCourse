@@ -33,7 +33,7 @@ public class TransformerTest {
 
     @Test
     public void testLength4LowerCaseNew() {
-        String input = "aaa bB ccdE";
+        String input = "aaa bB CCDE";
         String expected = "aaa bB ccde";
 
         Predicate<String> p = s -> s.length() == 4;
