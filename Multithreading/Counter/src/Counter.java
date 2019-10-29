@@ -11,7 +11,7 @@ public class Counter {
 		c--;
 	}
 	
-	public int value() {
+	public synchronized int value() {
 		return c;
 	}
 }

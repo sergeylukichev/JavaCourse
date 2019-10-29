@@ -9,6 +9,6 @@ public class Main {
 				new Thread(new Plane("Airbus 320")),
 				new Thread(new Plane("Il 86")));
 		
-		planes.stream().forEach(p -> p.start());
+		planes.forEach(Thread::start);
 	}
 }
