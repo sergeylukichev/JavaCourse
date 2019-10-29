@@ -6,9 +6,9 @@ public class ToLowerCaseChecker implements WordsChecker {
 		return word.length() == 2;
 	}
 
-	@Override
-	public String transformWord(String word) {
-		return word.toLowerCase();
-	}
+//	@Override
+//	public String transformWord(String word) {
+//		return word.toLowerCase();
+//	}
 
 }

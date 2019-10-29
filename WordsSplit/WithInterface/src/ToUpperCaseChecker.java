@@ -6,9 +6,9 @@ public class ToUpperCaseChecker implements WordsChecker {
 		return word.length() == 3;
 	}
 
-	@Override
-	public String transformWord(String word) {
-		return word.toUpperCase();
-	}
+//	@Override
+//	public String transformWord(String word) {
+//		return word.toUpperCase();
+//	}
 
 }
