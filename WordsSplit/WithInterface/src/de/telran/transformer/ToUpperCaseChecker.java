@@ -1,3 +1,4 @@
+package de.telran.transformer;
 
 public class ToUpperCaseChecker implements WordsChecker {
 
