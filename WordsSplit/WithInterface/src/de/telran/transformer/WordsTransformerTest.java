@@ -11,7 +11,7 @@ public class WordsTransformerTest {
 
     @Test
     public void testlength3Uppercase(){
-        String input = "aaa bB ccdE";
+        String input = "aaA bB ccdE";
         String expected = "AAA bB ccdE";
         String actual = WordsTransformer.transform(input);
 
