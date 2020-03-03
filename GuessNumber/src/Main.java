@@ -1,10 +1,17 @@
 public class Main {
 
     public static void main(String[] args) {
-        GuessNumberGame game = new GuessNumberGame(15,
-                3,
-                new KeyboardGuess(),
-                new ConsoleOutput());
+
+        KeyboardGuess source = new KeyboardGuess();
+        ConsoleOutput output = new ConsoleOutput();
+        int secretNumber = 15;
+        int attemptsCount = 3;
+
+        GuessNumberGame game = new GuessNumberGame(
+                secretNumber,
+                attemptsCount,
+                source,
+                output);
 
         game.play();
     }
