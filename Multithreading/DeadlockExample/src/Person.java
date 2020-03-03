@@ -20,7 +20,7 @@ public class Person {
 	}
 	
 	
-	//We have 2 persons who great each other and respond to greeting at the same time.
+	//We have 2 persons who greet each other and respond to greeting at the same time.
 	//We have a deadlock in most of the runs. 
 	//The reason is that we lock (obtain monitors) of 2 objects at the same time
 	//and both locked objects are waiting for each other locks to be release, which never happens
