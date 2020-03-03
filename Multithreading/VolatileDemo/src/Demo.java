@@ -13,11 +13,12 @@ public class Demo {
     }
 
     public static void main(String[] args) throws InterruptedException {
+
         Thread backgroundThread = new Thread(new Runnable() {
             public void run() {
                 int i = 0;
-                //while(!stopRequested){ <- if uncommented, will never stop
-                while (!getRequestStatus()) {
+                while(!stopRequested){ //<- if uncommented, will never stop
+                //while (!getRequestStatus()) {
                     i ++;
                 }
                 System.out.println(i);
@@ -27,8 +28,9 @@ public class Demo {
         backgroundThread.start();
 
         TimeUnit.SECONDS.sleep(1);
-//        stopRequested = true; <-- if uncommented will never stop
-        stopRequested();
+        stopRequested = true; //<-- if uncommented will never stop
+        //stopRequested();
+        System.out.println("I finished "+stopRequested);
     }
 }
 
