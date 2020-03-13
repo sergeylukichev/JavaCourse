@@ -9,5 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class Course {
     String title;
-    List<Student> students;
+    List<StudentDTO> students;
 }

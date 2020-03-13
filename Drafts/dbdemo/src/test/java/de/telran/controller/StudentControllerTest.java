@@ -16,8 +16,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,33 +56,49 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testGetSchoolInfo() throws Exception {
-        when(service.getSchoolInfo()).thenReturn(getSchoolData());
-        mvc.perform(get("/api/school")
+    public void testCreateNewStudent() throws Exception {
+        Student studentEntity = new Student(null, "ivan", "petrov", null);
+        Student savedStudentEntity = new Student(1L, "ivan", "petrov", null);
+        when(service.createStudent(studentEntity)).thenReturn(savedStudentEntity);
+
+        mvc.perform(post("/api/students")
+                .content("{\"firstName\": \"ivan\",\"lastName\":\"petrov\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(print())//good for simple debugging
-                .andExpect(jsonPath("$.courses").isArray())
-                .andExpect(jsonPath("$.courses[0].title").value("Java"))
-                .andExpect(jsonPath("$.courses[0].students[0].firstName").value("Ivan"))
-                .andExpect(jsonPath("$.courses[0].students[0].lastName").value("Petrov"))
-                .andExpect(jsonPath("$.courses[0].students[1].firstName").value("Piotr"))
-                .andExpect(jsonPath("$.courses[0].students[1].lastName").value("Ivanov"));
+                .andDo(print());
+
+        verify(service, times(1)).createStudent(studentEntity);
+
     }
 
-    private School getSchoolData() {
-        de.telran.dto.Student s1 = new de.telran.dto.Student("Ivan", "Petrov");
-        de.telran.dto.Student s2 = new de.telran.dto.Student("Piotr", "Ivanov");
-        Course c1 = new Course("Java", Arrays.asList(s1, s2));
+//    @Test
+//    public void testGetSchoolInfo() throws Exception {
+//        when(service.getSchoolInfo()).thenReturn(getSchoolData());
+//        mvc.perform(get("/api/school")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andDo(print())//good for simple debugging
+//                .andExpect(jsonPath("$.courses").isArray())
+//                .andExpect(jsonPath("$.courses[0].title").value("Java"))
+//                .andExpect(jsonPath("$.courses[0].students[0].firstName").value("Ivan"))
+//                .andExpect(jsonPath("$.courses[0].students[0].lastName").value("Petrov"))
+//                .andExpect(jsonPath("$.courses[0].students[1].firstName").value("Piotr"))
+//                .andExpect(jsonPath("$.courses[0].students[1].lastName").value("Ivanov"));
+//    }
 
-        de.telran.dto.Student s3 = new de.telran.dto.Student("Sergey", "Lukichev");
-        Course c2 = new Course("QA", Arrays.asList(s3));
-
-        return new School(Arrays.asList(c1, c2));
-    }
-
-
-
+//    private School getSchoolData() {
+//        de.telran.dto.Student s1 = new de.telran.dto.Student("Ivan", "Petrov");
+//        de.telran.dto.Student s2 = new de.telran.dto.Student("Piotr", "Ivanov");
+//        Course c1 = new Course("Java", Arrays.asList(s1, s2));
+//
+//        de.telran.dto.Student s3 = new de.telran.dto.Student("Sergey", "Lukichev");
+//        Course c2 = new Course("QA", Arrays.asList(s3));
+//
+//        return new School(Arrays.asList(c1, c2));
+//    }
+//
+//
+//
     private List<Student> createListOfStudents(){
         Student student1 = new Student();
         student1.setStudentId(0L);

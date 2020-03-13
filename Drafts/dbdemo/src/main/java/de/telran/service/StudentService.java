@@ -2,16 +2,14 @@ package de.telran.service;
 
 import de.telran.dto.Course;
 import de.telran.dto.School;
+import de.telran.dto.StudentDTO;
 import de.telran.entity.Student;
 import de.telran.dto.StudentsByCourse;
 import de.telran.repository.StudentRepository;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,10 +23,11 @@ public class StudentService {
     private StudentRepository respository;
 
     public Student createStudent(Student student) {
-        return respository.save(student);
+        Student savedStudent = respository.save(student);
+        return savedStudent;
     }
 
-    public List<Student> getAllStudents() {
+    public List<de.telran.entity.Student> getAllStudents() {
         return respository.findAll();
     }
 
@@ -41,8 +40,8 @@ public class StudentService {
     }
 
     public School getSchoolInfo() {
-        List<StudentsByCourse> studentsByCourse = respository.getStudentsByCourseId();
-        System.out.println(studentsByCourse);
+        List<StudentsByCourse> studentsByCourse = respository
+                .getStudentsByCourseId();
 
         List<Course> courses = new ArrayList<>();
 
@@ -51,7 +50,7 @@ public class StudentService {
                 .collect(Collectors.groupingBy(StudentsByCourse::getTitle));
 
         collect.forEach((k, v) ->
-                courses.add(new Course(k, v.stream().map(s -> new de.telran.dto.Student(s.getFirstName(), s.getLastName()))
+                courses.add(new Course(k, v.stream().map(s -> new StudentDTO(null, s.getFirstName(), s.getLastName(), null))
                         .collect(toList()))));
 
         return new School(courses);
