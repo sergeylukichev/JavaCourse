@@ -42,6 +42,7 @@ public class StudentServiceTest {
                 .thenReturn(createStudentsByCourse());
 
         School schoolInfo = service.getSchoolInfo();
+
         assertNotNull(schoolInfo);
     }
 

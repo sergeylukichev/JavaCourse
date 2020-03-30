@@ -1,15 +1,21 @@
 package de.telran.controller;
 
+import de.telran.config.TestConfig;
 import de.telran.dto.Course;
 import de.telran.dto.School;
 import de.telran.entity.Student;
 import de.telran.service.StudentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -27,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(StudentController.class)
+@Import(TestConfig.class)
 public class StudentControllerTest {
 
     @Autowired
@@ -65,7 +72,8 @@ public class StudentControllerTest {
                 .content("{\"firstName\": \"ivan\",\"lastName\":\"petrov\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andExpect(jsonPath("$.studentId").value("1"));
 
         verify(service, times(1)).createStudent(studentEntity);
 

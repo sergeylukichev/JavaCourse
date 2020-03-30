@@ -19,4 +19,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("select new de.telran.dto.StudentsByCourse(c.title, s.firstName, s.lastName) from Course as c join Student s on s.courseId = c.courseId")
     List<StudentsByCourse> getStudentsByCourseId();
+
+    Student findStudentByStudentId(Long stidentId);
 }

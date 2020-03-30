@@ -2,10 +2,12 @@ package de.telran.controller;
 
 import de.telran.dto.StudentDTO;
 import de.telran.entity.Student;
+import de.telran.exception.StudentNotFoundException;
 import de.telran.service.StudentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,11 +20,12 @@ public class StudentController {
 
     private StudentService service;
 
-    ModelMapper modelMapper = new ModelMapper();
+    private ModelMapper modelMapper;
 
     @Autowired
-    public StudentController(StudentService service) {
+    public StudentController(StudentService service, ModelMapper modelMapper) {
         this.service = service;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/api/students")
@@ -33,11 +36,17 @@ public class StudentController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/api/students/{student_id}")
+    StudentDTO getStudentById(@PathVariable("student_id") long studentId) throws StudentNotFoundException {
+        return modelMapper.map(service.getStudentById(studentId), StudentDTO.class);
+    }
+
     @PostMapping("/api/students")
     StudentDTO createStudent(@RequestBody StudentDTO student) {
-        System.out.println(student);
+        Student st = new Student();
+        st.setStudentId(student.getStudentId());
+        st.setFirstName(student.getFirstName());
         Student studentEntity = modelMapper.map(student, Student.class);
-        System.out.println(studentEntity);
         return modelMapper.map(service.createStudent(studentEntity), StudentDTO.class);
     }
 
