@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Our Students</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1> Add new student </h1>
+<form th:action="@{/addStudent}"
+      th:object="${studentForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}" /><br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}" /><br/>
+    Course:
+    <select th:field="*{course}">
+        <option value="0">select a course</option>
+        <option th:each="course : ${courses}" th:value="${course.courseId}" th:text="${course.title}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Add!" />
+</form>
+
+<h1> Students: </h1>
+
+
+<table>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> First Name </th>
+        <th> Last Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${students.empty}">
+        <td colspan="2"> No Students Available </td>
+    </tr>
+    <tr th:each="student : ${students}">
+        <td><span th:text="${student.studentId}"> Id </span></td>
+        <td><span th:text="${student.firstName}"> First Name </span></td>
+        <td><span th:text="${student.lastName}"> Last Name </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
