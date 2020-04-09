@@ -1,15 +1,26 @@
 public class WordTransformer {
-    //transform("aaa bcDE eklm iii") -> "AAA bdDE eklm III"
     //length == 3 -> to UpperCase
-    public static String transform(String input) {
+    //transform("aaa bcDE eklm iii") -> "AAA bdDE eklm III"
+
+    //length == 5 -> toLowerCase
+    //transform("aaa bcDEf eklm iiiPM") -> "aaa bcdef eklm iiipm"
+
+    //length ==2 -> relace first char with *
+    //transform("aa bcDEf ek") -> "*a bcDEf *k"
+
+    public static String transform(String input, TransformerRuleLentgh3 c) {
         String[] words = input.split(" ");
         for(int i = 0; i< words.length; i++ ) {
             String word = words[i];
-            if(word.length() == 3) {
-                words[i] = word.toUpperCase();
-
+            if (c.check(word)) {
+                words[i] = c.action(word);
             }
         }
         return String.join(" ", words);
+        //nothing is executed after this line
+    }
+
+    public static String transform(String input) {
+        return transform(input, new TransformerRuleLentgh3());
     }
 }
