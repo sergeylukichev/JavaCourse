@@ -43,6 +43,7 @@ public class StudentController {
 
     @PostMapping("/api/students")
     StudentDTO createStudent(@RequestBody StudentDTO student) {
+
         Student st = new Student();
         st.setStudentId(student.getStudentId());
         st.setFirstName(student.getFirstName());
