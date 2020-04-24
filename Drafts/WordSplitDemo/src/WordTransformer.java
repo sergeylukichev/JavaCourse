@@ -8,7 +8,7 @@ public class WordTransformer {
     //length ==2 -> relace first char with *
     //transform("aa bcDEf ek") -> "*a bcDEf *k"
 
-    public static String transform(String input, TransformerRuleLentgh3 c) {
+    public static String transform(String input, RuleInterface c) {
         String[] words = input.split(" ");
         for(int i = 0; i< words.length; i++ ) {
             String word = words[i];
@@ -21,6 +21,7 @@ public class WordTransformer {
     }
 
     public static String transform(String input) {
-        return transform(input, new TransformerRuleLentgh3());
+        RuleInterface c = new TransformerRuleLentgh3();
+        return transform(input, c);
     }
 }

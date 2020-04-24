@@ -1,4 +1,4 @@
-public class TransformerRuleLength5 extends TransformerRuleLentgh3 {
+public class TransformerRuleLength5 implements RuleInterface {
 
     @Override
     public boolean check(String word) {
