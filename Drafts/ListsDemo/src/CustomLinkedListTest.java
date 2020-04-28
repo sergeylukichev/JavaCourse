@@ -1,13 +1,11 @@
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-public class CustomArrayListTest {
-
+public class CustomLinkedListTest {
     @Test
     public void testSizeZero() {
-        CustomArrayList al = new CustomArrayList();
+        CustomLinkedList al = new CustomLinkedList();
         assertEquals(0, al.size());
     }
 
@@ -15,20 +13,26 @@ public class CustomArrayListTest {
     public void testSizeNotZero(){
 
         int [] ar = {1, 2, 3};
-        CustomArrayList<Integer> al = new CustomArrayList<>();
+        CustomLinkedList<Integer> al = new CustomLinkedList<>();
 
         for(int a:ar) {
             al.append(a);
         }
 
         assertEquals(3, al.size());
+    }
 
+    @Test
+    public void appendOneElemTest() {
+        CustomLinkedList<String> cl = new CustomLinkedList<>();
+        cl.append("test");
+        assertEquals("size", 1, cl.size());
     }
 
     @Test
     public void testGetAll() {
         int [] ar = {1, 2, 3};
-        CustomArrayList<Integer> al = new CustomArrayList<>();
+        CustomLinkedList<Integer> al = new CustomLinkedList<>();
 
         for(int a:ar) {
             al.append(a);
@@ -43,7 +47,7 @@ public class CustomArrayListTest {
     @Test
     public void testRemoveById() {
         String [] input = {"aa", "bb", "cc", "dd"};
-        CustomArrayList<String> al = new CustomArrayList<>();
+        CustomLinkedList<String> al = new CustomLinkedList<>();
 
         for(String a:input) {
             al.append(a);
@@ -61,28 +65,4 @@ public class CustomArrayListTest {
 
         assertEquals("cc", expectedDeletedItem);
     }
-
-    @Test
-    public void testRemoveByElement() {
-        String [] input = {"aa", "bb", "cc", "dd"};
-        CustomArrayList<String> al = new CustomArrayList<>();
-
-        for(String a:input) {
-            al.append(a);
-        }
-
-        boolean isRemoved = al.remove("ff");
-
-        String [] expected = {"aa", "bb", "dd"};
-
-        for(int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], al.get(i));
-        }
-
-        assertEquals(3, al.size());
-
-        assertTrue(isRemoved);
-
-    }
-
 }

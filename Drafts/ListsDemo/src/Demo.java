@@ -6,4 +6,10 @@ public class Demo {
     //update,search
     //getElementByIndex
     //addFirst
+
+    // set - TreeSet - Sergii
+    // set - HashSet - Dmitrii
+    // map - TreeMap - Alexander
+    // map -  HashMap - Evgeni
+    // deque - LIFO, LILO, Stack -
 }

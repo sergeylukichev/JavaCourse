@@ -46,17 +46,6 @@ public class CustomArrayList<E> implements CustomList<E>{
 
         System.arraycopy(source, index + 1, source, index, size - index);
 
-//        Object [] newSource = new Object[source.length];
-//        for(int i = 0; i< newSource.length; i++) {
-//            System.out.println(source[i]);
-//            if(i < index) {
-//                newSource[i] = source[i];
-//            }
-//            if(i >= index) {
-//                newSource[i] =source[i+1];
-//            }
-//        }
-
         size --;
 
         return (E) o;
@@ -64,7 +53,13 @@ public class CustomArrayList<E> implements CustomList<E>{
 
     @Override
     public boolean remove(E e) {
-
+        for (int i = 0; i < size; i++ ) {
+            if (e.equals(source[i])) {
+                System.arraycopy(source, i+1, source, i, size);
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 }
