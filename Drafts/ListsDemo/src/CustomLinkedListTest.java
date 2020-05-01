@@ -47,7 +47,7 @@ public class CustomLinkedListTest {
     @Test
     public void testRemoveById() {
         String [] input = {"aa", "bb", "cc", "dd"};
-        CustomLinkedList<String> al = new CustomLinkedList<>();
+        CustomList<String> al = new CustomLinkedList<>();
 
         for(String a:input) {
             al.append(a);

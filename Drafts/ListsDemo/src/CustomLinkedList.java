@@ -13,6 +13,8 @@ public class CustomLinkedList<E> implements CustomList<E> {
     //{e1, prev = null, next = null}, first = e1, last = e1
     //{e1, prev = null, next = e2 -> e2, prev = e1, next = null}, first = e1, last = e1
     //{e1, prev = null, next = e2 -> e2, prev = e1, next = e3 -> e3, prev = e2, next = null}, first = e1, last = e1
+    //e2.prev(e1).next(e2) = e2.next(e3)  ===> e1.next = e3
+    //e2.next(e3).prev(e2) = e2.prev(e1) ===> e3.prev = e1
 
     @Override
     public void append(E o) {
@@ -49,7 +51,17 @@ public class CustomLinkedList<E> implements CustomList<E> {
 
     @Override
     public E removeById(int index) {
-        return null;
+        if(index >= size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node ret = getNode(index);
+
+        ret.prev.next = ret.next;
+        ret.next.prev = ret.prev;
+        size--;
+
+        return (E)ret.value;
     }
 
     @Override
@@ -69,3 +81,6 @@ public class CustomLinkedList<E> implements CustomList<E> {
         }
     }
 }
+
+
+//User <- UserAdmin, Student, Teacher.
