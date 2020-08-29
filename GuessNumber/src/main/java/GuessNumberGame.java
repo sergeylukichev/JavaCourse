@@ -1,11 +1,18 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GuessNumberGame {
 
+    @Value("15") // Error:java: javacTask: source release 8 requires target release 1.8 - везде Java 8 стоит
     private int secretNumber;
+    @Value("3")
     private int attemptsCount;
     private GuessSource guessSource;
     private ResultOutput output;
 
+    @Autowired
     public GuessNumberGame(int secretNumber,
                            int attemptsCount,
                            GuessSource source,
