@@ -1,6 +1,7 @@
 package de.telran.processor.service;
 
 import de.telran.processor.entity.DownloadedImage;
+import de.telran.processor.entity.ImageDescriptor;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DownloadService {
-    public List<DownloadedImage> downloadImages(List<String> imageUrls) {
+    public List<DownloadedImage> downloadImages(List<ImageDescriptor> descriptors) {
         List<DownloadedImage> imageList = new ArrayList<>();
-        for(String urlName: imageUrls) {
+        for(ImageDescriptor descriptor: descriptors) {
             try {
-                URL url = new URL(urlName);
+                URL url = new URL(descriptor.getImageURL());
                 BufferedImage image = ImageIO.read(url);
-                imageList.add(new DownloadedImage(image, true));
+                imageList.add(new DownloadedImage(image, true, descriptor));
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                imageList.add(new DownloadedImage(null, false));
+                imageList.add(new DownloadedImage(null, false, descriptor));
             }
         }
         return imageList;
