@@ -1,0 +1,10 @@
+/bin/
+/out
+*.iml
+.idea
+.project
+.classpath
+/target/
+.idea
+*.iws
+*.ipr
